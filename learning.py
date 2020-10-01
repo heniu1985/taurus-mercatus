@@ -8,8 +8,10 @@ filename = "data/mbk_w.csv"
 
 df = pd.read_csv(filename)
 df = df[["Data", "Zamkniecie"]]
-MA = pd.Series(df['Zamkniecie'].rolling(30).mean(), name='MA_' + str("30"))
+MA = pd.Series(df['Zamkniecie'].rolling(30, min_periods=30).mean(), name='MA_' + str("30"))
 df = df.join(MA)
+EMA = pd.Series(df['Zamkniecie'].ewm(30, min_periods=30).mean(), name='EMA_' + str("30"))
+df = df.join(EMA)
 
 print(df)
 

@@ -26,6 +26,7 @@ Ready features:
 
 * Indicators.py:
   * Moving Average Function
+  * Exponential Moving Average function
 
 To-do list:
 
