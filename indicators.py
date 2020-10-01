@@ -1,6 +1,4 @@
-#  Imports. I think I can remove that in the future.
 import pandas as pd
-
 
 def moving_average(df, periods=30):
     # Function calculating Moving Average for given data
@@ -11,7 +9,7 @@ def moving_average(df, periods=30):
 
 def exponential_moving_average(df, periods=30):
     # Function calculating Moving Average for given data
-    ema = pd.Series(df['Zamkniecie'].ewm(periods, min_periods=periods).mean(), name='MA_' + str(periods))
+    ema = pd.Series(df['Zamkniecie'].ewm(periods, min_periods=periods).mean(), name='EMA_' + str(periods))
     df = df.join(ema)
     return df
 
