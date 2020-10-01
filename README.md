@@ -22,10 +22,14 @@ Program will analize quotes from selected companies and send email (later sms) i
 
 ## Features
 
+Ready features:
+
+* Indicators.py:
+  * Moving Average Function
+
 To-do list:
 
 * Indicators.py:
-  * Write function to calculate moving average.
   * Write function to calculate Relative Strenght Index:
     1. Take data from 14 periods
     2. Check how many times in that period prices are higher/lower than previous day.
