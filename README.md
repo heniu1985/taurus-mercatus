@@ -38,6 +38,7 @@ To-do list:
     4. Calculate Relative Strength (AvgHigher/AvgLower).
     5. Calculate Relative Strength Index (100 - (100  / (1 + RS))).
   * Write function to calculate True Strenght Index.
+* Download files with quotes.
 * Will be updated.
 
 ## Status
