@@ -12,7 +12,7 @@
 
 ## General info
 
-I write that program to learn python and help me in my investitions on Polish Stock Market (GPW).
+I write that program to learn python and help me in my investitions on Warsaw Stock Exchange (GPW).
 Program will analize quotes from selected companies and send email (later sms) if the conditions of my strategy are met.
 
 ## Technologies
@@ -30,16 +30,20 @@ Ready features:
 
 To-do list:
 
+* Add function which will download all qoutes from Warsaw Stock Exchange.
 * Indicators.py:
-  * Write function to calculate Relative Strenght Index:
+  * Add function to calculate Relative Strenght Index:
     1. Take data from 14 periods
     2. Check how many times in that period prices are higher/lower than previous day.
     3. Calculate average from prices which was higher/lower.
     4. Calculate Relative Strength (AvgHigher/AvgLower).
     5. Calculate Relative Strength Index (100 - (100  / (1 + RS))).
-  * Write function to calculate True Strenght Index.
-* Download files with quotes.
-* Will be updated.
+  * Add function to calculate True Strenght Index.
+* Add function that will count signals in my strategy from calculated indicators.
+* Add function that will send signals to email.
+* Add function that will send signals by sms.
+* Automate program to send signals every friday evening.
+* Later maybe expand program with additional indicators and strategies
 
 ## Status
 
