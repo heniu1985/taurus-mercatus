@@ -53,3 +53,14 @@ def list_of_symbols(file_path):
     symbols_list = set(symbols_list)
 
     return symbols_list
+
+def links_to_quotes():
+
+    path = symbols_file_path()
+
+    FILE_PATH = "data/links.txt"
+
+    with open(FILE_PATH, "w") as f:
+        
+        for row in list_of_symbols(path):
+            f.write(f"https://stooq.pl/q/d/l/?s={row}&i=w\n")
