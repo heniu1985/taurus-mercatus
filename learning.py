@@ -1,3 +1,5 @@
+import csv
+
 import pandas as pd
 
 import numpy as np
@@ -8,25 +10,43 @@ import indicators
 
 import requests
 
-filename = "data/symbole.csv"
+"""
+    Pobieranie pliku z symbolami
+"""
 
-res = requests.get("https://stooq.pl/db/l/?g=6")
+# filename = "data/stooq_symbole.csv"
 
-try:
-    res.raise_for_status()
-except Exception:
-    print("Zła strona!!!")
+# res = requests.get("https://stooq.pl/db/l/?g=6")
 
-symbole = open(filename, "wb")
+# try:
+#     res.raise_for_status()
+# except Exception:
+#     print("Zła strona!!!")
 
-for fragment in res.iter_content(100000):
-    symbole.write(fragment)
+# stooq_symbole = open(filename, "wb")
 
-symbole.close()
+# for fragment in res.iter_content(100000):
+#     stooq_symbole.write(fragment)
+
+# stooq_symbole.close()
+
+"""
+    Utworzenie listy z symbolami instrumentów
+"""
+
+# symbole = []
+# with open(filename) as f:
+#     reader = csv.reader(f)
+#     for row in reader:
+#         symbole.append(row[0][:3])
+
+# symbole.remove("<TI")
+# print(symbole)
 
 """
 Pobieranie notowań
 """
+# filename = "data/pkn_w.csv"
 
 # res = requests.get("https://stooq.pl/q/d/l/?s=pkn&i=w")
 
