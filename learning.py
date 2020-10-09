@@ -66,7 +66,7 @@ Pobieranie notowań
     Odczytywanie pliku z danymi
     Wyliczanie wskaźników
 """
-filename = "data/wic.csv"
+filename = "data/mbk.csv"
 
 try:
     df = pd.read_csv(filename)
