@@ -13,24 +13,24 @@ def symbols_file_path():
     Returns:
         FILE_PATH: Path to file with instruments symbol
     """
-    stooq_symbols = "data/stooq_symbols.csv"  # Path to CSV file with instruments symbol
-    symbols_url_path = "https://stooq.pl/db/l/?g=6"
+    STOOQ_SYMBOLS = "data/stooq_symbols.csv"  # Path to CSV file with instruments symbol
+    SYMBOLS_URL_PATH = "https://stooq.pl/db/l/?g=6"
 
-    symbols = requests.get(symbols_url_path)
+    symbols = requests.get(SYMBOLS_URL_PATH)
 
     try:
         symbols.raise_for_status()
     except Exception:
         print("Wrong path!!!")
 
-    symbols_file = open(stooq_symbols, "wb")
+    symbols_file = open(STOOQ_SYMBOLS, "wb")
     
     for fragment in symbols.iter_content(100000):
         symbols_file.write(fragment)
     
     symbols_file.close()
 
-    return stooq_symbols
+    return STOOQ_SYMBOLS
 
 def list_of_symbols(file_path):
     """Function make list with short instruments symbols
@@ -61,7 +61,31 @@ def links_to_quotes():
 
     FILE_PATH = "data/links.txt"
 
-    with open(FILE_PATH, "w") as f:
+    with open(FILE_PATH, "w") as F:
         
         for row in list_of_symbols(path):
-            f.write(f"https://stooq.pl/q/d/l/?s={row}&i=w\n")
+            F.write(f"https://stooq.pl/q/d/l/?s={row.lower()}&i=w\n")
+
+def download_qoutes():
+
+    LINKS_PATH = "data/links.txt"
+    
+    path = symbols_file_path()
+
+    with open(LINKS_PATH, "r") as L:
+        for line in L:
+            for row in list_of_symbols(path):
+                filename = f"data/{row.lower()}.csv"
+
+                link = requests.get(line)
+
+                try:
+                    link.raise_for_status()
+                except Exception:
+                    print("Bad link!!!")
+
+                quote = open(filename, "wb")
+                for chunk in link.iter_content(100000):
+                    quote.write(chunk)
+
+                quote.close()

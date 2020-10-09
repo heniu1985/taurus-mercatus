@@ -66,14 +66,20 @@ Pobieranie notowań
     Odczytywanie pliku z danymi
     Wyliczanie wskaźników
 """
+filename = "data/wic.csv"
 
-# df = pd.read_csv(filename)
-# df = df[["Data", "Zamkniecie"]]
+try:
+    df = pd.read_csv(filename)
+    df = df[["Data", "Zamkniecie"]]
 
-# df = indicators.moving_average(df)
-# df = indicators.exponential_moving_average(df)
+    df = indicators.moving_average(df)
+    df = indicators.exponential_moving_average(df)
 
-# print(df)
+    print(df)
+except KeyError:
+    print("Bad datas!!!")
+except FileNotFoundError:
+    print("File not found!!!")
 
 """
     Tworzenie wykresu
