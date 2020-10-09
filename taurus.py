@@ -31,3 +31,25 @@ def symbols_file_path():
     symbols_file.close()
 
     return stooq_symbols
+
+def list_of_symbols(file_path):
+    """Function make list with short instruments symbols
+
+    Args:
+        file_path (FILE_PATH): Path of file with instruments symbols
+
+    Returns:
+        list: List with short instruments symbols
+    """
+    symbols_list = []
+
+    with open(symbols_file_path()) as s:
+        reader = csv.reader(s)
+
+        for row in reader:
+            symbols_list.append(row[0][:3])
+    
+    symbols_list.remove("<TI")
+    symbols_list = set(symbols_list)
+
+    return symbols_list
