@@ -55,7 +55,8 @@ def list_of_symbols(file_path):
     return symbols_list
 
 def links_to_quotes():
-
+    """Function make a text file with links to files with qoutes
+    """
     path = symbols_file_path()
 
     FILE_PATH = "data/links.txt"
