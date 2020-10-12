@@ -1,95 +1,106 @@
 import csv
 
-import pandas as pd
+import requests
 
+import pandas as pd
 import numpy as np
 
 import matplotlib.pyplot as plt
 
 import indicators
 
-import requests
+# def symbols_file_path():
+#     """Function download file with instruments symbol
 
-"""
-    Pobieranie pliku z symbolami
-"""
+#     Returns:
+#         FILE_PATH: Path to file with instruments symbol
+#     """
+#     STOOQ_SYMBOLS = "data/stooq_symbols.csv"  # Path to CSV file with instruments symbol
+#     SYMBOLS_URL_PATH = "https://stooq.pl/db/l/?g=6"
 
-# filename = "data/stooq_symbole.csv"
+#     symbols = requests.get(SYMBOLS_URL_PATH)
 
-# res = requests.get("https://stooq.pl/db/l/?g=6")
+#     try:
+#         symbols.raise_for_status()
+#     except Exception:
+#         print("Wrong path!!!")
 
-# try:
-#     res.raise_for_status()
-# except Exception:
-#     print("Zła strona!!!")
+#     symbols_file = open(STOOQ_SYMBOLS, "wb")
+    
+#     for fragment in symbols.iter_content(100000):
+#         symbols_file.write(fragment)
+    
+#     symbols_file.close()
 
-# stooq_symbole = open(filename, "wb")
+#     return STOOQ_SYMBOLS
 
-# for fragment in res.iter_content(100000):
-#     stooq_symbole.write(fragment)
+# def list_of_symbols(file_path):
+#     """Function make list with short instruments symbols
 
-# stooq_symbole.close()
+#     Args:
+#         file_path (FILE_PATH): Path of file with instruments symbols
 
-"""
-    Utworzenie listy z symbolami instrumentów
-"""
+#     Returns:
+#         list: List with short instruments symbols
+#     """
+#     symbols_list = []
 
-# symbole = []
-# with open(filename) as f:
-#     reader = csv.reader(f)
-#     for row in reader:
-#         symbole.append(row[0][:3])
+#     with open(symbols_file_path()) as s:
+#         reader = csv.reader(s)
 
-# symbole.remove("<TI")
-# print(symbole)
+#         for row in reader:
+#             symbols_list.append(row[0][:3])
+    
+#     symbols_list.remove("<TI")
+#     symbols_list = set(symbols_list)
 
-"""
-Pobieranie notowań
-"""
-# filename = "data/pkn_w.csv"
+#     return symbols_list
 
-# res = requests.get("https://stooq.pl/q/d/l/?s=pkn&i=w")
+# def links_to_quotes():
+#     """Function make a text file with links to files with qoutes
+#     """
+#     path = symbols_file_path()
 
-# try:
-#     res.raise_for_status()
-# except Exception:
-#      print("Zła strona!!!")
+#     FILE_PATH = "data/links.txt"
 
-# pobrany_plik = open(filename, "wb")
+#     with open(FILE_PATH, "w") as F:
+        
+#         for row in list_of_symbols(path):
+#             F.write(f"https://stooq.pl/q/d/l/?s={row.lower()}&i=w\n")
 
-# for chunk in res.iter_content(100000):
-#     pobrany_plik.write(chunk)
+# def download_qoutes():
 
-# pobrany_plik.close()
+#     LINKS_PATH = "data/links.txt"
+    
+#     path = symbols_file_path()
 
-"""
-    Odczytywanie pliku z danymi
-    Wyliczanie wskaźników
-"""
-filename = "data/mbk.csv"
+#     with open(LINKS_PATH, "r") as L:
+#         for line in L:
+#             for row in list_of_symbols(path):
+#                 filename = f"data/{row.lower()}.csv"
 
-try:
-    df = pd.read_csv(filename)
-    df = df[["Data", "Zamkniecie"]]
+#                 link = requests.get(line)
 
-    df = indicators.moving_average(df)
-    df = indicators.exponential_moving_average(df)
+#                 try:
+#                     link.raise_for_status()
+#                 except Exception:
+#                     print("Bad link!!!")
 
-    print(df)
-except KeyError:
-    print("Bad datas!!!")
-except FileNotFoundError:
-    print("File not found!!!")
+#                 quote = open(filename, "wb")
+#                 for chunk in link.iter_content(100000):
+#                     quote.write(chunk)
 
-"""
-    Tworzenie wykresu
-"""
+#                 quote.close()
 
-# plt.figure(figsize=[15,10])
-# plt.grid(True)
-# plt.plot(df["Zamkniecie"], label="close")
-# plt.plot(df["MA_30"], label="MA_30")
-# plt.plot(df["EMA_30"], label="EMA_30")
-# plt.legend(loc=2)
+# """
+#     Tworzenie wykresu
+# """
 
-# plt.show()
+# # plt.figure(figsize=[15,10])
+# # plt.grid(True)
+# # plt.plot(df["Zamkniecie"], label="close")
+# # plt.plot(df["MA_30"], label="MA_30")
+# # plt.plot(df["EMA_30"], label="EMA_30")
+# # plt.legend(loc=2)
+
+# # plt.show()

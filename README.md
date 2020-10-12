@@ -24,13 +24,13 @@ Program will analize quotes from selected companies and send email (later sms) i
 
 Ready features:
 
+* Data download
 * Indicators.py:
   * Moving Average Function
   * Exponential Moving Average function
 
 To-do list:
 
-* Add function which will download all qoutes from Warsaw Stock Exchange. Must to change source of quoutes because of small call limit.
 * Indicators.py:
   * Add function to calculate Relative Strenght Index:
     1. Take data from 14 periods
