@@ -30,7 +30,7 @@ Ready features:
 
 To-do list:
 
-* Add function which will download all qoutes from Warsaw Stock Exchange.
+* Add function which will download all qoutes from Warsaw Stock Exchange. Must to change source of quoutes because of small call limit.
 * Indicators.py:
   * Add function to calculate Relative Strenght Index:
     1. Take data from 14 periods
