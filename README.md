@@ -31,9 +31,13 @@ Ready features:
 
 To-do list:
 
+* Data format:
+  * Change date format.
+  * Make DataFrame with ticker, date and close price.
+  * Change daily data format to weekly.
 * Indicators.py:
   * Add function to calculate Relative Strenght Index:
-    1. Take data from 14 periods
+    1. Take data from 14 periods.
     2. Check how many times in that period prices are higher/lower than previous day.
     3. Calculate average from prices which was higher/lower.
     4. Calculate Relative Strength (AvgHigher/AvgLower).
@@ -43,7 +47,7 @@ To-do list:
 * Add function that will send signals to email.
 * Add function that will send signals by sms.
 * Automate program to send signals every friday evening.
-* Later maybe expand program with additional indicators and strategies
+* Later maybe expand program with additional indicators and strategies.
 
 ## Status
 
