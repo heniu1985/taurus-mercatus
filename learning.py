@@ -1,3 +1,5 @@
+import os
+import zipfile
 import csv
 
 import requests
@@ -104,3 +106,12 @@ import indicators
 # # plt.legend(loc=2)
 
 # # plt.show()
+
+# path = "data/daily/pl/wse stocks/"
+
+# filenames = os.listdir(path)
+
+# print(filenames)
+
+# for filename in filenames:
+#     os.rename(path + filename, path + filename[:-4] + ".csv")
