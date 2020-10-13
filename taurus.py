@@ -70,7 +70,14 @@ def paths_to_file():
     return files_paths
 
 def file_to_dict(file_path):
+    """Function make list of dictionaries wiht quotes from given file
 
+    Args:
+        file_path (str): Path to file with qoutes
+
+    Returns:
+        list: List with dictionaries with qoutes
+    """
     with open(file_path, "r") as f:
         quotes_dict = []
         reader = csv.DictReader(f)
