@@ -94,9 +94,9 @@ import indicators
 
 #                 quote.close()
 
-# """
-#     Tworzenie wykresu
-# """
+"""
+    Tworzenie wykresu
+"""
 
 # # plt.figure(figsize=[15,10])
 # # plt.grid(True)
@@ -106,6 +106,10 @@ import indicators
 # # plt.legend(loc=2)
 
 # # plt.show()
+
+"""
+Zmiana nazw plików
+"""
 
 # path = "data/daily/pl/wse stocks/"
 
