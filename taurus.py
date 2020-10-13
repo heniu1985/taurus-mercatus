@@ -1,5 +1,6 @@
 # Imports
 
+import os
 import zipfile
 import csv
 
@@ -43,3 +44,5 @@ def unpack_datas():
     for file in packed_datas.namelist():
         if file.startswith(ZIP_UNPACK_PATH):
             packed_datas.extract(file)
+
+    os.remove(ARCHIVE_PATH)
