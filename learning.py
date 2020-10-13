@@ -135,11 +135,22 @@ import indicators
 
 # print(df)
 
-# filename = "data/daily/pl/wse stocks/1at.csv"
+filename = "data/daily/pl/wse stocks/1at.csv"
 
-# df = pd.read_csv(filename)
-# df = df[["<DATE>", "<CLOSE>"]]
+df = pd.read_csv(filename)
+df = df[["<DATE>", "<CLOSE>"]]
 
+df_dates = []
+i = 0
 
+with open(filename, "r") as f:
+    csv_reader = csv.reader(f)
+    for line in csv_reader:
+        df_dates.append(line[2])
 
-# print(df)
+for data in df_dates:
+    year = data[:4]
+    month = data[4:6]
+    day = data[6:]
+    df_dates[i] = f"{year}-{month}-{day}"
+    i += 1
