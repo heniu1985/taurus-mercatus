@@ -18,6 +18,7 @@ import indicators
 DOWNLOAD_PATH = "https://static.stooq.pl/db/h/d_pl_txt.zip"
 ARCHIVE_PATH = "data/all_data.zip"
 QUOTES_PATH = "data/daily/pl/wse stocks/"
+POSITION_TO_DELETE = ["<PER>", "<TIME>", "<OPEN>", "<HIGH>", "<LOW>", "<OPENINT>"]
 
 # Functions
 
@@ -86,3 +87,18 @@ def file_to_dict(file_path):
             quotes_dict.append(line)
     
     return quotes_dict
+
+# path = paths_to_file()[5]
+# dicts_list = file_to_dict(path)
+# filename = "output.txt"
+
+# for position in dicts_list:
+#     del position["<PER>"]
+#     del position["<TIME>"]
+#     del position["<OPEN>"]
+#     del position["<HIGH>"]
+#     del position["<LOW>"]
+#     del position["<OPENINT>"]
+
+# with open(filename, "w") as f:
+#     print(dicts_list, file=f)
