@@ -135,22 +135,16 @@ import indicators
 
 # print(df)
 
-filename = "data/daily/pl/wse stocks/1at.csv"
+"""
+    Zmiana pliku csv na słownik
+"""
 
-df = pd.read_csv(filename)
-df = df[["<DATE>", "<CLOSE>"]]
+# filename = "data/daily/pl/wse stocks/1at.csv"
 
-df_dates = []
-i = 0
+# with open(filename, "r") as csvfile:
+#     datas_dict = []
+#     reader = csv.DictReader(csvfile)
+#     for line in reader:
+#         datas_dict.append(line)
 
-with open(filename, "r") as f:
-    csv_reader = csv.reader(f)
-    for line in csv_reader:
-        df_dates.append(line[2])
-
-for data in df_dates:
-    year = data[:4]
-    month = data[4:6]
-    day = data[6:]
-    df_dates[i] = f"{year}-{month}-{day}"
-    i += 1
+# print(datas_dict)
