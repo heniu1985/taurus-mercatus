@@ -68,3 +68,14 @@ def paths_to_file():
         files_paths.append(QUOTES_PATH + file)
 
     return files_paths
+
+def file_to_dict(file_path):
+
+    with open(file_path, "r") as f:
+        quotes_dict = []
+        reader = csv.DictReader(f)
+
+        for line in reader:
+            quotes_dict.append(line)
+    
+    return quotes_dict
