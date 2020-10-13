@@ -54,3 +54,17 @@ def change_extension():
 
     for filename in filenames:
         os.rename(QUOTES_PATH + filename, QUOTES_PATH + filename[:-4] + ".csv")
+
+def paths_to_file():
+    """Function return list of csv files paths with quotation datas
+
+    Returns:
+        list: List of csv files paths with quotation datas
+    """
+    filenames = os.listdir(QUOTES_PATH)
+    files_paths = []
+
+    for file in filenames:
+        files_paths.append(QUOTES_PATH + file)
+
+    return files_paths
