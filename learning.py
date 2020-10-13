@@ -2,6 +2,8 @@ import os
 import zipfile
 import csv
 
+import datetime
+
 import requests
 
 import pandas as pd
@@ -108,7 +110,7 @@ import indicators
 # # plt.show()
 
 """
-Zmiana nazw plików
+    Zmiana nazw plików
 """
 
 # path = "data/daily/pl/wse stocks/"
@@ -119,3 +121,25 @@ Zmiana nazw plików
 
 # for filename in filenames:
 #     os.rename(path + filename, path + filename[:-4] + ".csv")
+
+"""
+    Odczytywanie pliku z danymi
+    Wyliczanie wskaźników
+"""
+
+# df = pd.read_csv(filename)
+# df = df[["Data", "Zamkniecie"]]
+
+# df = indicators.moving_average(df)
+# df = indicators.exponential_moving_average(df)
+
+# print(df)
+
+# filename = "data/daily/pl/wse stocks/1at.csv"
+
+# df = pd.read_csv(filename)
+# df = df[["<DATE>", "<CLOSE>"]]
+
+
+
+# print(df)
