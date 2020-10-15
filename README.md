@@ -32,7 +32,6 @@ Ready features:
 To-do list:
 
 * Data format:
-  * Change date format.
   * Make DataFrame with ticker, date and close price.
   * Change daily data format to weekly.
 * Indicators.py:
