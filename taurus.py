@@ -89,7 +89,14 @@ def file_to_dicts_lists(file_path):
     return dicts_list
 
 def change_dicts_dates_format(list_of_dicts):
+    """Function change dates format in all dictionaries on list
 
+    Args:
+        list_of_dicts (list): List of dictionaries with dates to correct
+
+    Returns:
+        list: List of dictionaries with corrected dates format
+    """
     for dictionary in list_of_dicts:
         date = dictionary["<DATE>"]
         year = date[:4]
