@@ -88,6 +88,23 @@ def file_to_dicts_lists(file_path):
     
     return dicts_list
 
+def del_unnecessary_keys(list_of_dicts):
+    """Function delete unnecessary keys from dictionaries with quotes
+
+    Args:
+        list_of_dicts (list): List with dictionaries with qoutes
+
+    Returns:
+        list: Formated list with dictionaries
+    """
+    keys_to_del = ["<PER>", "<TIME>", "<OPEN>", "<HIHG>", "<LOW>", "<OPENINT>", "<VOL>"]
+    for position in list_of_dicts:
+        for key in keys_to_del:
+            if key in position:
+                del position[key]
+    
+    return list_of_dicts
+
 def change_dicts_dates_format(list_of_dicts):
     """Function change dates format in all dictionaries on list
 
@@ -106,24 +123,3 @@ def change_dicts_dates_format(list_of_dicts):
         dictionary["<DATE>"] = date
 
     return list_of_dicts
-
-path = paths_to_file()[0]
-lists = file_to_dicts_lists(path)
-dates_change = change_dicts_dates_format(lists)
-
-print(dates_change)
-
-# path = paths_to_file()[5]
-# dicts_list = file_to_dict(path)
-# filename = "output.txt"
-
-# for position in dicts_list:
-#     del position["<PER>"]
-#     del position["<TIME>"]
-#     del position["<OPEN>"]
-#     del position["<HIGH>"]
-#     del position["<LOW>"]
-#     del position["<OPENINT>"]
-
-# with open(filename, "w") as f:
-#     print(dicts_list, file=f)
