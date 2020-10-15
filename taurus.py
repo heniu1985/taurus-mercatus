@@ -70,7 +70,7 @@ def paths_to_file():
 
     return files_paths
 
-def file_to_dict(file_path):
+def file_to_dicts_lists(file_path):
     """Function make list of dictionaries wiht quotes from given file
 
     Args:
@@ -80,13 +80,31 @@ def file_to_dict(file_path):
         list: List with dictionaries with qoutes
     """
     with open(file_path, "r") as f:
-        quotes_dict = []
+        dicts_list = []
         reader = csv.DictReader(f)
 
         for line in reader:
-            quotes_dict.append(line)
+            dicts_list.append(line)
     
-    return quotes_dict
+    return dicts_list
+
+def change_dicts_dates_format(list_of_dicts):
+
+    for dictionary in list_of_dicts:
+        date = dictionary["<DATE>"]
+        year = date[:4]
+        month = date[4:6]
+        day = date[6:]
+        date = f"{year}-{month}-{day}"
+        dictionary["<DATE>"] = date
+
+    return list_of_dicts
+
+path = paths_to_file()[0]
+lists = file_to_dicts_lists(path)
+dates_change = change_dicts_dates_format(lists)
+
+print(dates_change)
 
 # path = paths_to_file()[5]
 # dicts_list = file_to_dict(path)
