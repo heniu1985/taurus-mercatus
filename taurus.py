@@ -19,7 +19,7 @@ DOWNLOAD_PATH = "https://static.stooq.pl/db/h/d_pl_txt.zip"
 ARCHIVE_PATH = "data/all_data.zip"
 QUOTES_PATH = "data/daily/pl/wse stocks/"
 DATA_PATH = "data/datafiles/"
-POSITION_TO_DELETE = ["<PER>", "<TIME>", "<OPEN>", "<HIGH>", "<LOW>", "<VOL>", "<OPENINT>"]
+POSITION_TO_DELETE = ["<TICKER>", "<PER>", "<TIME>", "<OPEN>", "<HIGH>", "<LOW>", "<VOL>", "<OPENINT>"]
 
 # Functions
 
@@ -140,6 +140,16 @@ def back_to_file(file_path, list_of_dicts):
         writer.writeheader()
         writer.writerows(list_of_dicts)
 
+def csv_to_df(filename):
+
+    df = pd.read_csv(filename)
+    df["<DATE>"] = pd.to_datetime(df["<DATE>"])
+    df.set_index("<DATE>", inplace=True)
+    df["<CLOSE>"] = df["<CLOSE>"].round(2)
+    df = df.resample("W").last()
+
+    return df
+
 def main():
 
     """Data download"""
@@ -151,10 +161,15 @@ def main():
     """Data format"""
 
     # for path in paths_to_file():
-    #     ftdl = file_to_dicts_lists(path)
-    #     duk = del_unnecessary_keys(ftdl)
-    #     cddf = change_dicts_dates_format(duk)
-    #     back_to_file(path, cddf)
+        # ftdl = file_to_dicts_lists(path)
+        # duk = del_unnecessary_keys(ftdl)
+        # cddf = change_dicts_dates_format(duk)
+        # back_to_file(path, cddf)
+
+    """Pandas DataFrame"""
+
+    filename = DATA_PATH + "mbk.csv"
+    print(csv_to_df(filename))
 
 if __name__ == "__main__":
     main()
