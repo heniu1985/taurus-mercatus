@@ -49,7 +49,7 @@ def unpack_datas():
 
     os.remove(ARCHIVE_PATH)
 
-def change_extension():
+def change_extensions():
     """Function change file extensions from txt to csv
     """
     filenames = os.listdir(QUOTES_PATH)
@@ -142,14 +142,19 @@ def back_to_file(file_path, list_of_dicts):
 
 def main():
 
-    pass
+    """Data download"""
+
+    # download_datas()
+    # unpack_datas()
+    # change_extensions()
+
+    """Data format"""
+
+    # for path in paths_to_file():
+    #     ftdl = file_to_dicts_lists(path)
+    #     duk = del_unnecessary_keys(ftdl)
+    #     cddf = change_dicts_dates_format(duk)
+    #     back_to_file(path, cddf)
 
 if __name__ == "__main__":
     main()
-    
-# x = paths_to_file()[0]
-# a = file_to_dicts_lists(x)
-# b = del_unnecessary_keys(a)
-# c = change_dicts_dates_format(b)
-
-# back_to_file(x, c)
