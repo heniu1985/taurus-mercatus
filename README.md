@@ -31,9 +31,6 @@ Ready features:
 
 To-do list:
 
-* Data format:
-  * Make DataFrame with date and close price.
-  * Change daily data format to weekly.
 * Chceck that change are needed in idicators.py.
 * Indicators.py:
   * Add function to calculate Relative Strenght Index:
