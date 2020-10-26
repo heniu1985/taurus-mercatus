@@ -125,11 +125,11 @@ def change_dicts_dates_format(list_of_dicts):
     return list_of_dicts
 
 def back_to_file(file_path, list_of_dicts):
-    """Function create new datafiles which program will use later.
+    """Function create new datafiles which program will use later
 
     Args:
-        file_path (string): Path to downloaded file with quotes.
-        list_of_dicts (list): List of dictionaries with qoutes.
+        file_path (string): Path to downloaded file with quotes
+        list_of_dicts (list): List of dictionaries with qoutes
     """
     filename = DATA_PATH + file_path[-7:]
 
@@ -141,7 +141,14 @@ def back_to_file(file_path, list_of_dicts):
         writer.writerows(list_of_dicts)
 
 def csv_to_df(filename):
+    """Function create pandas.DataFrame from giving csv file
 
+    Args:
+        filename (string): Path to csv file with quotes
+
+    Returns:
+        pandas.DataFrame: pandas.DataFrame from giving csv file
+    """
     df = pd.read_csv(filename)
     df["<DATE>"] = pd.to_datetime(df["<DATE>"])
     df.set_index("<DATE>", inplace=True)
@@ -169,7 +176,6 @@ def main():
     """Pandas DataFrame"""
 
     filename = DATA_PATH + "mbk.csv"
-    print(csv_to_df(filename))
 
 if __name__ == "__main__":
     main()
