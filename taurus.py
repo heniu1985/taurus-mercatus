@@ -176,6 +176,11 @@ def main():
     """Pandas DataFrame"""
 
     filename = DATA_PATH + "mbk.csv"
+    df = csv_to_df(filename)
+    df = indicators.moving_average(df)
+    df = indicators.exponential_moving_average(df)
+
+    print(df)
 
 if __name__ == "__main__":
     main()

@@ -12,8 +12,8 @@ def moving_average(df, periods=30):
     Returns:
         pandas.DataFrame: Quotes extended by the calculated MA
     """
-    ma = pd.Series(df['Zamkniecie'].rolling(periods, min_periods=periods).mean(), name='MA_' + str(periods))
-    df = df.join(ma)
+    ma = pd.Series(df['<CLOSE>'].rolling(periods, min_periods=periods).mean(), name='MA_' + str(periods))
+    df = df.join(ma.round(4))
     return df
 
 
@@ -27,8 +27,8 @@ def exponential_moving_average(df, periods=30):
     Returns:
         pandas.DataFrame: Quotes extended by the calculated EMA
     """
-    ema = pd.Series(df['Zamkniecie'].ewm(periods, min_periods=periods).mean(), name='EMA_' + str(periods))
-    df = df.join(ema)
+    ema = pd.Series(df['<CLOSE>'].ewm(periods, min_periods=periods).mean(), name='EMA_' + str(periods))
+    df = df.join(ema.round(4))
     return df
 
 
