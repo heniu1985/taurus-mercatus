@@ -18,7 +18,8 @@ import indicators
 DOWNLOAD_PATH = "https://static.stooq.pl/db/h/d_pl_txt.zip"
 ARCHIVE_PATH = "data/all_data.zip"
 QUOTES_PATH = "data/daily/pl/wse stocks/"
-POSITION_TO_DELETE = ["<PER>", "<TIME>", "<OPEN>", "<HIGH>", "<LOW>", "<OPENINT>"]
+DATA_PATH = "data/datafiles/"
+POSITION_TO_DELETE = ["<PER>", "<TIME>", "<OPEN>", "<HIGH>", "<LOW>", "<VOL>", "<OPENINT>"]
 
 # Functions
 
@@ -71,7 +72,7 @@ def paths_to_file():
     return files_paths
 
 def file_to_dicts_lists(file_path):
-    """Function make list of dictionaries wiht quotes from given file
+    """Function make list of dictionaries with quotes from given file
 
     Args:
         file_path (str): Path to file with qoutes
@@ -97,9 +98,8 @@ def del_unnecessary_keys(list_of_dicts):
     Returns:
         list: Formated list with dictionaries
     """
-    keys_to_del = ["<PER>", "<TIME>", "<OPEN>", "<HIHG>", "<LOW>", "<OPENINT>", "<VOL>"]
     for position in list_of_dicts:
-        for key in keys_to_del:
+        for key in POSITION_TO_DELETE:
             if key in position:
                 del position[key]
     
@@ -123,3 +123,33 @@ def change_dicts_dates_format(list_of_dicts):
         dictionary["<DATE>"] = date
 
     return list_of_dicts
+
+def back_to_file(file_path, list_of_dicts):
+    """Function create new datafiles which program will use later.
+
+    Args:
+        file_path (string): Path to downloaded file with quotes.
+        list_of_dicts (list): List of dictionaries with qoutes.
+    """
+    filename = DATA_PATH + file_path[-7:]
+
+    keys = list_of_dicts[0].keys()
+
+    with open(filename, "w") as f:
+        writer = csv.DictWriter(f, fieldnames=keys)
+        writer.writeheader()
+        writer.writerows(list_of_dicts)
+
+def main():
+
+    pass
+
+if __name__ == "__main__":
+    main()
+    
+# x = paths_to_file()[0]
+# a = file_to_dicts_lists(x)
+# b = del_unnecessary_keys(a)
+# c = change_dicts_dates_format(b)
+
+# back_to_file(x, c)
