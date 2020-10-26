@@ -14,6 +14,7 @@ def moving_average(df, periods=30):
     """
     ma = pd.Series(df['<CLOSE>'].rolling(periods, min_periods=periods).mean(), name='MA_' + str(periods))
     df = df.join(ma.round(4))
+
     return df
 
 
@@ -29,12 +30,14 @@ def exponential_moving_average(df, periods=30):
     """
     ema = pd.Series(df['<CLOSE>'].ewm(periods, min_periods=periods).mean(), name='EMA_' + str(periods))
     df = df.join(ema.round(4))
+
     return df
 
 
-def rsi():
+def rsi(df, periods=14):
+    
     pass
 
-
 def tsi():
+    
     pass
