@@ -31,15 +31,6 @@ Ready features:
 
 To-do list:
 
-* Chceck that change are needed in idicators.py.
-* Indicators.py:
-  * Add function to calculate Relative Strenght Index:
-    1. Take data from 14 periods.
-    2. Check how many times in that period prices are higher/lower than previous day.
-    3. Calculate average from prices which was higher/lower.
-    4. Calculate Relative Strength (AvgHigher/AvgLower).
-    5. Calculate Relative Strength Index (100 - (100  / (1 + RS))).
-  * Add function to calculate True Strenght Index.
 * Add function that will count signals in my strategy from calculated indicators.
 * Add function that will send signals to email.
 * Add function that will send signals by sms.

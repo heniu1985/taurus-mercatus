@@ -182,17 +182,5 @@ def main():
     df = indicators.rsi(df)
     df = indicators.tsi(df)
 
-    # plt.figure(figsize=[15,10])
-    # plt.grid(True)
-    # plt.plot(df["<CLOSE>"], label="close")
-    # plt.plot(df["MA"], label="MA")
-    # plt.plot(df["EMA"], label="EMA")
-    # plt.plot(df["RSI"], label="RSI")
-    # plt.legend(loc=2)
-    # plt.figure(figsize=[10,5])
-    # plt.plot(df["TSI"], label="TSI")
-
-    # plt.show()
-
 if __name__ == "__main__":
     main()
