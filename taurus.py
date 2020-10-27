@@ -179,6 +179,7 @@ def main():
     df = csv_to_df(filename)
     df = indicators.moving_average(df)
     df = indicators.exponential_moving_average(df)
+    df = indicators.rsi(df)
 
     print(df)
 
