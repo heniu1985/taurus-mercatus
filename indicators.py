@@ -13,7 +13,7 @@ def moving_average(df, periods=30):
     Returns:
         pandas.DataFrame: Quotes extended by the calculated MA
     """
-    ma = pd.Series(df['<CLOSE>'].rolling(periods, min_periods=periods).mean(), name='MA_' + str(periods))
+    ma = pd.Series(df["<CLOSE>"].rolling(periods, min_periods=periods).mean(), name="MA")
     df = df.join(ma.round(4))
 
     return df
@@ -29,7 +29,7 @@ def exponential_moving_average(df, periods=30):
     Returns:
         pandas.DataFrame: Quotes extended by the calculated EMA
     """
-    ema = pd.Series(df['<CLOSE>'].ewm(periods, min_periods=periods).mean(), name='EMA_' + str(periods))
+    ema = pd.Series(df["<CLOSE>"].ewm(periods, min_periods=periods).mean(), name="EMA")
     df = df.join(ema.round(4))
 
     return df
@@ -97,6 +97,15 @@ def rsi(df, periods=14):
 
     return df
 
-def tsi():
+def tsi(df, long_ema=25, short_ema=13):
     
-    pass
+    price_difference = pd.Series(df["<CLOSE>"].diff(1))
+    abs_price_difference = abs(price_difference)
+    ema1 = pd.Series(price_difference.ewm(span=long_ema, min_periods=long_ema).mean())
+    abs_ema1 = pd.Series(abs_price_difference.ewm(span=long_ema, min_periods=long_ema).mean())
+    ema2 = pd.Series(ema1.ewm(span=short_ema, min_periods=short_ema).mean())
+    abs_ema2 = pd.Series(abs_ema1.ewm(span=short_ema, min_periods=short_ema).mean())
+    tsi = pd.Series(ema2 / abs_ema2, name="TSI")
+    df = df.join(tsi)
+
+    return df
