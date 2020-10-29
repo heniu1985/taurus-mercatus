@@ -1,1 +1,0 @@
-# This file contains contents of emails to send
