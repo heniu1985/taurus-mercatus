@@ -175,7 +175,7 @@ def main():
 
     """Pandas DataFrame"""
 
-    filename = DATA_PATH + "mbk.csv"
+    filename = DATA_PATH + "cdr.csv"
     df = csv_to_df(filename)
     df = indicators.moving_average(df)
     df = indicators.exponential_moving_average(df)
