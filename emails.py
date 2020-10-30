@@ -1,5 +1,14 @@
 import smtplib
 
+EMAIL_LOG = "data/email_logins.txt"
+
+def email_logins():
+
+    with open(EMAIL_LOG, "r") as f:
+        logins = [line.strip() for line in f]
+
+    return logins
+
 def send_email(sent_from, sent_to, subject, body, password):
     """Function send emails
 
@@ -10,13 +19,12 @@ def send_email(sent_from, sent_to, subject, body, password):
         body (string): Email body
         password (string): Password needed to send mail
     """
-    email = """\
-        From: %s
-        To: %s
-        Subject: %s
+    email = """From: %s
+    To: %s
+    Subject: %s
 
-        %s
-        """ % (sent_from, sent_to, subject, body)
+    %s
+    """ % (sent_from, sent_to, subject, body)
 
     try:
         server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
@@ -27,14 +35,13 @@ def send_email(sent_from, sent_to, subject, body, password):
     except:
         print("Send error!!!")
 
-# filename = "data/email_log.txt"
+def error_mail():
 
-# with open(filename, "r") as f:
-#     email_list = [line.strip() for line in f]
+    pass
 
-# sent_from = email_list[0]
-# sent_to = email_list[1]
-# password = email_list[2]
+# sent_from = email_logins()[0]
+# sent_to = email_logins()[1]
+# password = email_logins()[2]
 # subject = "Test"
 # body = """
 # Test

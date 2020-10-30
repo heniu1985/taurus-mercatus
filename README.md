@@ -28,13 +28,13 @@ Ready features:
 * Indicators.py:
   * Moving Average Function
   * Exponential Moving Average function
+  * Relative Strenght Index
+  * True Strenght Index
 
 To-do list:
 
 * Add function that will count signals in my strategy from calculated indicators.
 * Add function that will send signals to email.
-* Add function that will send signals by sms.
-* Automate program to send signals every friday evening.
 * Later maybe expand program with additional indicators and strategies.
 
 ## Status
