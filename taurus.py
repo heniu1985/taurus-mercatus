@@ -227,7 +227,7 @@ def main():
     test test test
     """
 
-    # send_email(sent_from, sent_to, subject, body, password)
+    send_email(sent_from, sent_to, subject, body, password)
 
 if __name__ == "__main__":
     main()
