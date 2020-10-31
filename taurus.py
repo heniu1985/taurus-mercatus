@@ -22,7 +22,7 @@ DOWNLOAD_PATH = "https://static.stooq.pl/db/h/d_pl_txt.zip"
 ARCHIVE_PATH = "data/all_data.zip"
 QUOTES_PATH = "data/daily/pl/wse stocks/"
 DATA_PATH = "data/datafiles/"
-POSITION_TO_DELETE = ["<TICKER>", "<PER>", "<TIME>", "<OPEN>", "<HIGH>", "<LOW>", "<VOL>", "<OPENINT>"]
+POSITION_TO_DELETE = ["<TICKER>", "<PER>", "<TIME>", "<VOL>", "<OPENINT>"]
 
 # Functions
 
@@ -155,10 +155,27 @@ def csv_to_df(filename):
     df = pd.read_csv(filename)
     df["<DATE>"] = pd.to_datetime(df["<DATE>"])
     df.set_index("<DATE>", inplace=True)
-    df["<CLOSE>"] = df["<CLOSE>"].round(2)
+    df["<CLOSE>"] = df["<CLOSE>"]
     df = df.resample("W").last()
 
     return df
+
+def signal(df):
+
+    high = df["<HIGH>"]
+    low = df["<LOW>"]
+    ma = df["MA"]
+    tsi = df["TSI"]
+    signal = ""
+
+    if ma[-1] < low[-1] and ma[-2] > low[-2] and tsi[-1] < 0 and tsi[-1] > tsi[-2]:
+        signal = "Prawdopodobny sygnał kupna"
+    elif ma[-1] > high[-1] and ma[-2] < high[-2] and tsi[-1] > 0 and tsi[-1] < tsi[-2]:
+        signal = "Prawdopodobny sygnał sprzedaży"
+    else:
+        signal = "Brak sygnału"
+
+    return signal
 
 def main():
 
@@ -183,12 +200,32 @@ def main():
 
     """Pandas DataFrame"""
 
-    # filename = DATA_PATH + "cdr.csv"
+    # filename = DATA_PATH + "cig.csv"
     # df = csv_to_df(filename)
     # df = indicators.moving_average(df)
     # df = indicators.exponential_moving_average(df)
     # df = indicators.rsi(df)
     # df = indicators.tsi(df)
+
+    # print(df)
+
+    """Signals countig"""
+
+    filenames = os.listdir(DATA_PATH)
+    lista = {}
+
+    for filename in filenames:
+        f = DATA_PATH + filename
+        df = csv_to_df(f)
+        df = indicators.moving_average(df)
+        df = indicators.exponential_moving_average(df)
+        df = indicators.rsi(df)
+        df = indicators.tsi(df)
+        s = signal(df)
+        lista[filename[:3]] = s
+
+    print(lista)
+    
 
 if __name__ == "__main__":
     main()

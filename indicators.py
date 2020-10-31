@@ -105,7 +105,7 @@ def tsi(df, long_ema=25, short_ema=13):
     abs_ema1 = pd.Series(abs_price_difference.ewm(span=long_ema, min_periods=long_ema).mean())
     ema2 = pd.Series(ema1.ewm(span=short_ema, min_periods=short_ema).mean())
     abs_ema2 = pd.Series(abs_ema1.ewm(span=short_ema, min_periods=short_ema).mean())
-    tsi = pd.Series(ema2 / abs_ema2, name="TSI")
+    tsi = pd.Series(ema2 / abs_ema2, name="TSI").round(4)
     df = df.join(tsi)
 
     return df
