@@ -19,12 +19,9 @@ def send_email(sent_from, sent_to, subject, body, password):
         body (string): Email body
         password (string): Password needed to send mail
     """
-    email = """From: %s
-    To: %s
-    Subject: %s
-
+    email = """
     %s
-    """ % (sent_from, sent_to, subject, body)
+    """ % (body)
 
     try:
         server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
@@ -35,9 +32,19 @@ def send_email(sent_from, sent_to, subject, body, password):
     except:
         print("Send error!!!")
 
-def error_mail():
+def files_downloaded():
 
-    pass
+    subject = "Files updated"
+    body = "The files have been downloaded and updated"
+    
+    send_email(email_logins()[0], email_logins()[1], subject, body, email_logins()[2])
+
+def download_error():
+
+    subject = "Download Error"
+    body = "File download failed"
+
+    send_email(email_logins()[0], email_logins()[1], subject, body, email_logins()[2])
 
 # sent_from = email_logins()[0]
 # sent_to = email_logins()[1]

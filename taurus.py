@@ -162,19 +162,24 @@ def csv_to_df(filename):
 
 def main():
 
-    """Data download"""
+    # try:
+    #     """Data download"""
 
-    # download_datas()
-    # unpack_datas()
-    # change_extensions()
+    #     download_datas()
+    #     unpack_datas()
+    #     change_extensions()
 
-    """Data format"""
+    #     """Data format"""
 
-    # for path in paths_to_file():
-        # ftdl = file_to_dicts_lists(path)
-        # duk = del_unnecessary_keys(ftdl)
-        # cddf = change_dicts_dates_format(duk)
-        # back_to_file(path, cddf)
+    #     for path in paths_to_file():
+    #         ftdl = file_to_dicts_lists(path)
+    #         duk = del_unnecessary_keys(ftdl)
+    #         cddf = change_dicts_dates_format(duk)
+    #         back_to_file(path, cddf)
+        
+    #     emails.files_downloaded()
+    # except:
+    #     emails.download_error()
 
     """Pandas DataFrame"""
 
