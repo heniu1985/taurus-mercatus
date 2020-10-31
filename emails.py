@@ -19,15 +19,14 @@ def send_email(sent_from, sent_to, subject, body, password):
         body (string): Email body
         password (string): Password needed to send mail
     """
-    email = """
-    %s
-    """ % (body)
+    message = """From: %s\nTo: %s\nSubject: %s\n\n%s
+    """% (sent_from, sent_to, subject, body)
 
     try:
         server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
         server.ehlo()
         server.login(sent_from, password)
-        server.sendmail(sent_from, sent_to, email)
+        server.sendmail(sent_from, sent_to, message)
         server.close()
     except:
         print("Send error!!!")
@@ -45,14 +44,3 @@ def download_error():
     body = "File download failed"
 
     send_email(email_logins()[0], email_logins()[1], subject, body, email_logins()[2])
-
-# sent_from = email_logins()[0]
-# sent_to = email_logins()[1]
-# password = email_logins()[2]
-# subject = "Test"
-# body = """
-# Test
-# test test test
-# """
-
-# send_email(sent_from, sent_to, subject, body, password)
