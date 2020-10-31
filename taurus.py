@@ -160,9 +160,8 @@ def csv_to_df(filename):
 
     return df
 
-def signal(df):
+def buy_signal(df):
 
-    high = df["<HIGH>"]
     low = df["<LOW>"]
     ma = df["MA"]
     tsi = df["TSI"]
@@ -170,10 +169,8 @@ def signal(df):
 
     if ma[-1] < low[-1] and ma[-2] > low[-2] and tsi[-1] < 0 and tsi[-1] > tsi[-2]:
         signal = "Prawdopodobny sygnał kupna"
-    elif ma[-1] > high[-1] and ma[-2] < high[-2] and tsi[-1] > 0 and tsi[-1] < tsi[-2]:
-        signal = "Prawdopodobny sygnał sprzedaży"
     else:
-        signal = "Brak sygnału"
+        signal = "0"
 
     return signal
 
@@ -221,7 +218,7 @@ def main():
         df = indicators.exponential_moving_average(df)
         df = indicators.rsi(df)
         df = indicators.tsi(df)
-        s = signal(df)
+        s = buy_signal(df)
         lista[filename[:3]] = s
 
     print(lista)
