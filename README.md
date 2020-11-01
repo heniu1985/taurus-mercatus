@@ -30,7 +30,8 @@ Ready features:
   * Exponential Moving Average function
   * Relative Strenght Index
   * True Strenght Index
-* Functions calculating signals to long, short and close position taken
+  * True Strenght Index Moving Average
+* Functions calculating signals to take long, short and close position
 
 To-do list:
 
