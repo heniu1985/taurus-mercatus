@@ -36,7 +36,15 @@ def exponential_moving_average(df, periods=30):
 
 
 def rsi(df, periods=14):
-    
+    """Function calculating Relative Strenght Index
+
+    Args:
+        df (pandas.DataFrame): Quotes with closing prices
+        periods (int, optional): The number of periods from wich EMA is calculated. Defaults to 14.
+
+    Returns:
+        pandas.DataFrame: Quotes extended by the calculated RSI
+    """
     prices = df["<CLOSE>"].tolist()
 
     i = 0
@@ -98,7 +106,16 @@ def rsi(df, periods=14):
     return df
 
 def tsi(df, long_ema=25, short_ema=13):
-    
+    """Function calculating Relative Strenght Index
+
+    Args:
+        df (pandas.DataFrame): Quotes with closing prices
+        long_ema (int, optional): Long EMA needed to calculated TSI. Defaults to 25.
+        short_ema (int, optional): Short EMA needed to calculated TSI. Defaults to 13.
+
+    Returns:
+        pandas.DataFrame: Quotes extended by the calculated TSI
+    """
     price_difference = pd.Series(df["<CLOSE>"].diff(1))
     abs_price_difference = abs(price_difference)
     ema1 = pd.Series(price_difference.ewm(span=long_ema, min_periods=long_ema).mean())
@@ -118,7 +135,7 @@ def tsi_moving_average(df, periods=7):
         periods (int, optional): The number of periods from which MA is calculated. Defaults to 7.
 
     Returns:
-        pandas.DataFrame: Quotes extended by the calculated MA
+        pandas.DataFrame: Quotes extended by the calculated TSI MA
     """
     ma = pd.Series(df["TSI"].rolling(periods, min_periods=periods).mean(), name="TSI_MA")
     df = df.join(ma.round(4))
