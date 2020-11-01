@@ -161,7 +161,7 @@ def csv_to_df(filename):
     return df
 
 def buy_signal(df):
-    """Buy signal function
+    """Function calculates signal to open long position
 
     Args:
         df (pandas.DataFrame): pandas.DataFrame
@@ -173,7 +173,7 @@ def buy_signal(df):
     tsi_ma = df["TSI_MA"]
     signal = ""
 
-    if (tsi[-1] < 0 and tsi_ma[-1] < 0) and (tsi[-1] > tsi_ma[-1] and tsi[-2] < tsi[-2]):
+    if (tsi[-2] < 0 and tsi_ma[-1] < 0) and (tsi[-1] > tsi_ma[-1] and tsi[-2] < tsi[-2]):
         signal = "Buy"
     else:
         signal = False
@@ -181,7 +181,7 @@ def buy_signal(df):
     return signal
 
 def sell_signal(df):
-    """Sell signal function
+    """Function calculates signal to open short position
 
     Args:
         df (pandas.DataFrame): pandas.DataFrame
@@ -199,6 +199,40 @@ def sell_signal(df):
         signal = False
 
     return signal
+
+def close_long_position(df):
+    """Function calculates signal to close long position
+
+    Returns:
+        string: return "Close long position" if condition is met else False
+    """
+    close_price = df["<CLOSE>"]
+    ma = df["MA"]
+    clp = ""
+
+    if close_price[-1] < ma[-1] and close_price[-2] > ma[-2]:
+        clp = "Close long position"
+    else:
+        clp = False
+
+    return clp
+
+def close_short_position(df):
+    """Function calculates signal to close short position
+
+    Returns:
+        string: return "Close short position" if condition is met else False
+    """
+    close_price = df["<CLOSE>"]
+    ma = df["MA"]
+    csp = ""
+
+    if close_price[-1] > ma[-1] and close_price[-2] < ma[-2]:
+        csp = "Close short position"
+    else:
+        csp = False
+
+    return csp
 
 def main():
 
@@ -234,7 +268,10 @@ def main():
     """Signals countig"""
 
     filenames = os.listdir(DATA_PATH)
-    lista = {}
+    buy = {}
+    sell = {}
+    close_long = {}
+    close_short = {}
 
     for filename in filenames:
         f = DATA_PATH + filename
@@ -244,27 +281,22 @@ def main():
         df = indicators.rsi(df)
         df = indicators.tsi(df)
         df = indicators.tsi_moving_average(df)
-        s = sell_signal(df)
+        b = buy_signal(df)
+        s = sell_signal(df)        
+        cl = close_long_position(df)
+        cs = close_short_position(df)
         if s == False:
             pass
         else:
-            lista[filename[:3]] = s
+            buy[filename[:3]] = b
+            sell[filename[:3]] = s
+            close_long[filename[:3]] = cl
+            close_short[filename[:3]] = cs
 
-    print(lista)
-
-    # plt.figure(figsize=[15,10])
-    # plt.grid(True)
-    # plt.plot(df["<CLOSE>"], label="CLOSE")
-    # plt.plot(df["MA"], label="MA")
-    # plt.legend(loc=2)
-
-    # plt.figure(figsize=[15,10])
-    # plt.grid(True)
-    # plt.plot(df["TSI"], label="TSI")
-    # plt.plot(df["TSI_MA"], label="TSI_MA")
-    # plt.legend(loc=2)
-
-    # plt.show()    
+    print("BUY: ", buy)
+    print("SELL: ", sell)
+    print("CLOSE LONG POSITION: ", close_long)
+    print("CLOSE SHORT POSITION: ", close_short)
 
 if __name__ == "__main__":
     main()
