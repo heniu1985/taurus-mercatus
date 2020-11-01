@@ -161,16 +161,42 @@ def csv_to_df(filename):
     return df
 
 def buy_signal(df):
+    """Buy signal function
 
-    low = df["<LOW>"]
-    ma = df["MA"]
+    Args:
+        df (pandas.DataFrame): pandas.DataFrame
+
+    Returns:
+        string: return "Buy" if condition is met else False
+    """
     tsi = df["TSI"]
+    tsi_ma = df["TSI_MA"]
     signal = ""
 
-    if ma[-1] < low[-1] and ma[-2] > low[-2] and tsi[-1] < 0 and tsi[-1] > tsi[-2]:
-        signal = "Prawdopodobny sygnał kupna"
+    if (tsi[-1] < 0 and tsi_ma[-1] < 0) and (tsi[-1] > tsi_ma[-1] and tsi[-2] < tsi[-2]):
+        signal = "Buy"
     else:
-        signal = "0"
+        signal = False
+
+    return signal
+
+def sell_signal(df):
+    """Sell signal function
+
+    Args:
+        df (pandas.DataFrame): pandas.DataFrame
+
+    Returns:
+        string: return "Sell" if condition is met else False
+    """
+    tsi = df["TSI"]
+    tsi_ma = df["TSI_MA"]
+    signal = ""
+
+    if (tsi[-1] > 0 and tsi_ma[-1] > 0) and (tsi[-1] < tsi_ma[-1] and tsi[-2] > tsi[-2]):
+        signal = "Sell"
+    else:
+        signal = False
 
     return signal
 
@@ -203,8 +229,7 @@ def main():
     # df = indicators.exponential_moving_average(df)
     # df = indicators.rsi(df)
     # df = indicators.tsi(df)
-
-    # print(df)
+    # df = indicators.tsi_moving_average(df)
 
     """Signals countig"""
 
@@ -218,11 +243,28 @@ def main():
         df = indicators.exponential_moving_average(df)
         df = indicators.rsi(df)
         df = indicators.tsi(df)
-        s = buy_signal(df)
-        lista[filename[:3]] = s
+        df = indicators.tsi_moving_average(df)
+        s = sell_signal(df)
+        if s == False:
+            pass
+        else:
+            lista[filename[:3]] = s
 
     print(lista)
-    
+
+    # plt.figure(figsize=[15,10])
+    # plt.grid(True)
+    # plt.plot(df["<CLOSE>"], label="CLOSE")
+    # plt.plot(df["MA"], label="MA")
+    # plt.legend(loc=2)
+
+    # plt.figure(figsize=[15,10])
+    # plt.grid(True)
+    # plt.plot(df["TSI"], label="TSI")
+    # plt.plot(df["TSI_MA"], label="TSI_MA")
+    # plt.legend(loc=2)
+
+    # plt.show()    
 
 if __name__ == "__main__":
     main()
