@@ -2,3 +2,7 @@ requests
 pandas
 numpy
 matplotlib
+smtplib
+csv
+zipfile
+os
