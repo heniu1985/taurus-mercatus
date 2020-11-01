@@ -30,10 +30,10 @@ Ready features:
   * Exponential Moving Average function
   * Relative Strenght Index
   * True Strenght Index
+* Functions calculating signals to long, short and close position taken
 
 To-do list:
 
-* Add function that will count signals in my strategy from calculated indicators.
 * Add function that will send signals to email.
 * Later maybe expand program with additional indicators and strategies.
 
