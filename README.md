@@ -13,7 +13,7 @@
 ## General info
 
 I write that program to learn python and help me in my investitions on Warsaw Stock Exchange (GPW).
-Program will analize quotes from selected companies and send email (later sms) if the conditions of my strategy are met.
+Program will analize quotes from selected companies and send email if the conditions of my strategy are met.
 
 ## Technologies
 
