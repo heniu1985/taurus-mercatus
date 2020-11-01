@@ -255,16 +255,6 @@ def main():
     # except:
     #     emails.download_error()
 
-    """Pandas DataFrame"""
-
-    # filename = DATA_PATH + "cig.csv"
-    # df = csv_to_df(filename)
-    # df = indicators.moving_average(df)
-    # df = indicators.exponential_moving_average(df)
-    # df = indicators.rsi(df)
-    # df = indicators.tsi(df)
-    # df = indicators.tsi_moving_average(df)
-
     """Signals countig"""
 
     filenames = os.listdir(DATA_PATH)
