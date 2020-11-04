@@ -279,7 +279,8 @@ def count_signals():
     return signals
 
 def send_buy_signals_email():
-
+    """Function send "BUY" signals
+    """
     buy_dict = count_signals()[0]
     signal = "BUY"
     
@@ -289,7 +290,8 @@ def send_buy_signals_email():
         emails.buy_signals(buy_dict)
 
 def send_sell_signals_email():
-
+    """Function send "SELL" signals
+    """
     sell_dict = count_signals()[1]
     signal = "SELL"
     
@@ -299,7 +301,8 @@ def send_sell_signals_email():
         emails.buy_signals(sell_dict)
 
 def send_close_long_signals_email():
-
+    """Function send close long posiotion signals
+    """
     close_long_dict = count_signals()[2]
     signal = "CLOSE LONG POSITION"
     
@@ -309,7 +312,8 @@ def send_close_long_signals_email():
         emails.buy_signals(close_long_dict)
 
 def send_close_short_signals_email():
-
+    """Function send close short position signals
+    """
     close_short_dict = count_signals()[3]
     signal = "CLOSE SHORT POSITION"
     
