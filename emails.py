@@ -102,7 +102,7 @@ def close_long_signals(signals_dict):
 
     send_email(email_logins()[0], email_logins()[1], subject, body, email_logins()[2])
 
-def close_short_signal(signals_dict):
+def close_short_signals(signals_dict):
     """Function send email with close short posiotion signals
 
     Args:
