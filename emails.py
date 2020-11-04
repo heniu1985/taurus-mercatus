@@ -35,6 +35,7 @@ def files_downloaded():
 
     subject = "Files updated"
     body = "The files have been downloaded and updated"
+    print(body)
     
     send_email(email_logins()[0], email_logins()[1], subject, body, email_logins()[2])
 
