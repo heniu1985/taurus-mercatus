@@ -32,10 +32,10 @@ Ready features:
   * True Strenght Index
   * True Strenght Index Moving Average
 * Functions calculating signals to take long, short and close position
+* Function sendig emails with signals
 
 To-do list:
 
-* Add function that will send signals to email.
 * Later maybe expand program with additional indicators and strategies.
 
 ## Status
