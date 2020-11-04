@@ -234,30 +234,18 @@ def close_short_position(df):
 
     return csp
 
-def main():
+def count_signal():
+    """Function counts transaction signals
 
-    try:
-        """Data download"""
-
-        download_datas()
-        unpack_datas()
-        change_extensions()
-
-        """Data format"""
-
-        for path in paths_to_file():
-            ftdl = file_to_dicts_lists(path)
-            duk = del_unnecessary_keys(ftdl)
-            cddf = change_dicts_dates_format(duk)
-            back_to_file(path, cddf)
-        
-        emails.files_downloaded()
-    except:
-        emails.download_error()
-
-    """Signals countig"""
-
+    Returns:
+        list: list of dictionaries with signals
+        1. Dictionary for buy signals
+        2. Dictionary for sell signals
+        3. Dictionary for close long position
+        4. Dictionary for close short position
+    """
     filenames = os.listdir(DATA_PATH)
+    signals = []
     buy = {}
     sell = {}
     close_long = {}
@@ -282,11 +270,36 @@ def main():
             sell[filename[:3]] = s
             close_long[filename[:3]] = cl
             close_short[filename[:3]] = cs
+    
+    signals.append(buy)
+    signals.append(sell)
+    signals.append(close_long)
+    signals.append(close_short)
 
-    print("BUY: ", buy)
-    print("SELL: ", sell)
-    print("CLOSE LONG POSITION: ", close_long)
-    print("CLOSE SHORT POSITION: ", close_short)
+    return signals
+
+def main():
+
+    # try:
+    #     """Data download"""
+
+    #     download_datas()
+    #     unpack_datas()
+    #     change_extensions()
+
+    #     """Data format"""
+
+    #     for path in paths_to_file():
+    #         ftdl = file_to_dicts_lists(path)
+    #         duk = del_unnecessary_keys(ftdl)
+    #         cddf = change_dicts_dates_format(duk)
+    #         back_to_file(path, cddf)
+        
+    #     emails.files_downloaded()
+    # except:
+    #     emails.download_error()
+
+    print(count_signal())
 
 if __name__ == "__main__":
     main()
