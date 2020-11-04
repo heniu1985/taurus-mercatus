@@ -234,7 +234,7 @@ def close_short_position(df):
 
     return csp
 
-def count_signal():
+def count_signals():
     """Function counts transaction signals
 
     Returns:
@@ -278,28 +278,72 @@ def count_signal():
 
     return signals
 
+def send_buy_signals_email():
+
+    buy_dict = count_signals()[0]
+    signal = "BUY"
+    
+    if len(buy_dict) == 0:
+        emails.no_signals(signal)
+    else:
+        emails.buy_signals(buy_dict)
+
+def send_sell_signals_email():
+
+    sell_dict = count_signals()[1]
+    signal = "SELL"
+    
+    if len(sell_dict) == 0:
+        emails.no_signals(signal)
+    else:
+        emails.buy_signals(sell_dict)
+
+def send_close_long_signals_email():
+
+    close_long_dict = count_signals()[2]
+    signal = "CLOSE LONG POSITION"
+    
+    if len(close_long_dict) == 0:
+        emails.no_signals(signal)
+    else:
+        emails.buy_signals(close_long_dict)
+
+def send_close_short_signals_email():
+
+    close_short_dict = count_signals()[3]
+    signal = "CLOSE SHORT POSITION"
+    
+    if len(close_short_dict) == 0:
+        emails.no_signals(signal)
+    else:
+        emails.buy_signals(close_short_dict)
+
 def main():
 
-    # try:
-    #     """Data download"""
+    try:
+        """Data download"""
 
-    #     download_datas()
-    #     unpack_datas()
-    #     change_extensions()
+        download_datas()
+        unpack_datas()
+        change_extensions()
 
-    #     """Data format"""
+        """Data format"""
 
-    #     for path in paths_to_file():
-    #         ftdl = file_to_dicts_lists(path)
-    #         duk = del_unnecessary_keys(ftdl)
-    #         cddf = change_dicts_dates_format(duk)
-    #         back_to_file(path, cddf)
+        for path in paths_to_file():
+            ftdl = file_to_dicts_lists(path)
+            duk = del_unnecessary_keys(ftdl)
+            cddf = change_dicts_dates_format(duk)
+            back_to_file(path, cddf)
         
-    #     emails.files_downloaded()
-    # except:
-    #     emails.download_error()
+        emails.files_downloaded()
+    except:
+        emails.download_error()
 
-    print(count_signal())
+    count_signals()
+    send_buy_signals_email()
+    send_sell_signals_email()
+    send_close_long_signals_email()
+    send_close_short_signals_email()
 
 if __name__ == "__main__":
     main()
