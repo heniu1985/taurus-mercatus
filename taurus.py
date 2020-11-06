@@ -20,6 +20,7 @@ import indicators
 
 DOWNLOAD_PATH = "https://static.stooq.pl/db/h/d_pl_txt.zip"
 ARCHIVE_PATH = "data/all_data.zip"
+IN_ZIP_PATH = "data/daily/pl/wse stocks/"
 QUOTES_PATH = "data/daily/pl/wse stocks/"
 DATA_PATH = "data/datafiles/"
 POSITION_TO_DELETE = ["<TICKER>", "<PER>", "<TIME>", "<VOL>", "<OPENINT>"]
@@ -47,7 +48,7 @@ def unpack_datas():
     packed_datas = zipfile.ZipFile(ARCHIVE_PATH)
 
     for file in packed_datas.namelist():
-       if file.startswith(QUOTES_PATH):
+       if file.startswith(IN_ZIP_PATH):
             packed_datas.extract(file)
 
     os.remove(ARCHIVE_PATH)
