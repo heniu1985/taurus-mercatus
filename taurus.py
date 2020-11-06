@@ -71,8 +71,8 @@ def paths_to_file():
     filenames = os.listdir(QUOTES_PATH)
     files_paths = []
 
-    for file in filenames:
-        files_paths.append(QUOTES_PATH + file)
+    for f in filenames:
+        files_paths.append(QUOTES_PATH + f)
 
     return files_paths
 
@@ -324,6 +324,13 @@ def send_close_short_signals_email():
     else:
         emails.close_short_signals(close_short_dict)
 
+def clear_datas():
+
+    shutil.rmtree("data/daily")
+    files_to_remove = (f for f in os.listdir(DATA_PATH))
+    for f in files_to_remove:
+        os.remove(DATA_PATH + f)    
+
 def main():
 
     try:
@@ -351,7 +358,7 @@ def main():
     send_close_long_signals_email()
     send_close_short_signals_email()
 
-    shutil.rmtree("data/daily")
+    clear_datas()
 
 if __name__ == "__main__":
     main()
