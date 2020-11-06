@@ -1,6 +1,7 @@
 # Imports
 
 import os
+import shutil
 import zipfile
 import csv
 
@@ -349,6 +350,8 @@ def main():
     send_sell_signals_email()
     send_close_long_signals_email()
     send_close_short_signals_email()
+
+    shutil.rmtree("data/daily")
 
 if __name__ == "__main__":
     main()
