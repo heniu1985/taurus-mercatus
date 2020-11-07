@@ -324,13 +324,6 @@ def send_close_short_signals_email():
     else:
         emails.close_short_signals(close_short_dict)
 
-def clear_datas():
-
-    shutil.rmtree("data/daily")
-    files_to_remove = (f for f in os.listdir(DATA_PATH))
-    for f in files_to_remove:
-        os.remove(DATA_PATH + f)    
-
 def main():
 
     try:
@@ -357,8 +350,6 @@ def main():
     send_sell_signals_email()
     send_close_long_signals_email()
     send_close_short_signals_email()
-
-    clear_datas()
 
 if __name__ == "__main__":
     main()
