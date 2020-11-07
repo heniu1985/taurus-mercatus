@@ -20,6 +20,7 @@ import indicators
 
 DOWNLOAD_PATH = "https://static.stooq.pl/db/h/d_pl_txt.zip"
 ARCHIVE_PATH = "data/all_data.zip"
+IN_ZIP_PATH = "data/daily/pl/wse stocks/"
 QUOTES_PATH = "data/daily/pl/wse stocks/"
 DATA_PATH = "data/datafiles/"
 POSITION_TO_DELETE = ["<TICKER>", "<PER>", "<TIME>", "<VOL>", "<OPENINT>"]
@@ -47,7 +48,7 @@ def unpack_datas():
     packed_datas = zipfile.ZipFile(ARCHIVE_PATH)
 
     for file in packed_datas.namelist():
-       if file.startswith(QUOTES_PATH):
+       if file.startswith(IN_ZIP_PATH):
             packed_datas.extract(file)
 
     os.remove(ARCHIVE_PATH)
@@ -69,8 +70,8 @@ def paths_to_file():
     filenames = os.listdir(QUOTES_PATH)
     files_paths = []
 
-    for file in filenames:
-        files_paths.append(QUOTES_PATH + file)
+    for f in filenames:
+        files_paths.append(QUOTES_PATH + f)
 
     return files_paths
 
@@ -298,7 +299,7 @@ def send_sell_signals_email():
     if len(sell_dict) == 0:
         emails.no_signals(signal)
     else:
-        emails.buy_signals(sell_dict)
+        emails.sell_signals(sell_dict)
 
 def send_close_long_signals_email():
     """Function send close long posiotion signals
@@ -309,7 +310,7 @@ def send_close_long_signals_email():
     if len(close_long_dict) == 0:
         emails.no_signals(signal)
     else:
-        emails.buy_signals(close_long_dict)
+        emails.close_long_signals(close_long_dict)
 
 def send_close_short_signals_email():
     """Function send close short position signals
@@ -320,28 +321,28 @@ def send_close_short_signals_email():
     if len(close_short_dict) == 0:
         emails.no_signals(signal)
     else:
-        emails.buy_signals(close_short_dict)
+        emails.close_short_signals(close_short_dict)
 
 def main():
 
-    try:
-        """Data download"""
+    # try:
+    #     """Data download"""
 
-        download_datas()
-        unpack_datas()
-        change_extensions()
+    #     download_datas()
+    #     unpack_datas()
+    #     change_extensions()
 
-        """Data format"""
+    #     """Data format"""
 
-        for path in paths_to_file():
-            ftdl = file_to_dicts_lists(path)
-            duk = del_unnecessary_keys(ftdl)
-            cddf = change_dicts_dates_format(duk)
-            back_to_file(path, cddf)
+    #     for path in paths_to_file():
+    #         ftdl = file_to_dicts_lists(path)
+    #         duk = del_unnecessary_keys(ftdl)
+    #         cddf = change_dicts_dates_format(duk)
+    #         back_to_file(path, cddf)
         
-        emails.files_downloaded()
-    except:
-        emails.download_error()
+    #     emails.files_downloaded()
+    # except:
+    #     emails.download_error()
 
     count_signals()
     send_buy_signals_email()
