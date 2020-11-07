@@ -324,30 +324,38 @@ def send_close_short_signals_email():
 
 def main():
 
-    try:
-        """Data download"""
+    # try:
+    #     """Data download"""
 
-        download_datas()
-        unpack_datas()
-        change_extensions()
+    #     download_datas()
+    #     unpack_datas()
+    #     change_extensions()
 
-        """Data format"""
+    #     """Data format"""
 
-        for path in paths_to_file():
-            ftdl = file_to_dicts_lists(path)
-            duk = del_unnecessary_keys(ftdl)
-            cddf = change_dicts_dates_format(duk)
-            back_to_file(path, cddf)
+    #     for path in paths_to_file():
+    #         ftdl = file_to_dicts_lists(path)
+    #         duk = del_unnecessary_keys(ftdl)
+    #         cddf = change_dicts_dates_format(duk)
+    #         back_to_file(path, cddf)
         
-        emails.files_downloaded()
-    except:
-        emails.download_error()
+    #     emails.files_downloaded()
+    # except:
+    #     emails.download_error()
 
-    count_signals()
-    send_buy_signals_email()
-    send_sell_signals_email()
-    send_close_long_signals_email()
-    send_close_short_signals_email()
+    # count_signals()
+    # send_buy_signals_email()
+    # send_sell_signals_email()
+    # send_close_long_signals_email()
+    # send_close_short_signals_email()
+
+    for path in paths_to_file():
+        x = file_to_dicts_lists(path)
+        x = del_unnecessary_keys(x)
+        x = change_dicts_dates_format(x)
+        back_to_file(path, x)
+
+    print(x)
 
 if __name__ == "__main__":
     main()

@@ -40,7 +40,7 @@ To-do list:
 
 ## Status
 
-Project is: _working_, _suspended_
+Project is: _in progress_
 
 ## Contact
 
