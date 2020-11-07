@@ -1,6 +1,7 @@
 # Imports
 
 import os
+import shutil
 import zipfile
 import csv
 
@@ -52,13 +53,35 @@ def unpack_datas():
 
     os.remove(ARCHIVE_PATH)
 
-def change_extensions():
-    """Function change file extensions from txt to csv
-    """
+def check_files():
+
     filenames = os.listdir(QUOTES_PATH)
 
     for filename in filenames:
-        os.rename(QUOTES_PATH + filename, QUOTES_PATH + filename[:-4] + ".csv")
+        if len(filename) != 7:
+            os.remove(QUOTES_PATH + filename)
+            print(filename + " DELETED")
+
+def move_files():
+
+    filenames = os.listdir(QUOTES_PATH)
+
+    for filename in filenames:
+        os.rename(QUOTES_PATH + filename, DATA_PATH + filename)
+    
+    shutil.rmtree("data/daily")
+
+def change_extensions():
+    """Function change file extensions from txt to csv
+    """
+    filenames = os.listdir(DATA_PATH)
+
+    for filename in filenames:
+        if filename.endswith("txt"):
+            os.rename(DATA_PATH + filename, DATA_PATH + filename[:-3] + "csv")
+        else:
+            os.remove(DATA_PATH + filename)
+            print(filename + " DELETED")
 
 def paths_to_file():
     """Function return list of csv files paths with quotation datas
@@ -66,11 +89,11 @@ def paths_to_file():
     Returns:
         list: List of csv files paths with quotation datas
     """
-    filenames = os.listdir(QUOTES_PATH)
+    filenames = os.listdir(DATA_PATH)
     files_paths = []
 
-    for file in filenames:
-        files_paths.append(QUOTES_PATH + file)
+    for filename in filenames:
+        files_paths.append(DATA_PATH + filename)
 
     return files_paths
 
@@ -324,24 +347,29 @@ def send_close_short_signals_email():
 
 def main():
 
+    """Data download"""
+
     try:
-        """Data download"""
 
         download_datas()
         unpack_datas()
+        check_files()
+        move_files()
         change_extensions()
-
-        """Data format"""
-
-        for path in paths_to_file():
-            ftdl = file_to_dicts_lists(path)
-            duk = del_unnecessary_keys(ftdl)
-            cddf = change_dicts_dates_format(duk)
-            back_to_file(path, cddf)
-        
+    
         emails.files_downloaded()
     except:
         emails.download_error()
+
+    """Data format"""
+
+    for path in paths_to_file():
+        ftdl = file_to_dicts_lists(path)
+        duk = del_unnecessary_keys(ftdl)
+        cddf = change_dicts_dates_format(duk)
+        back_to_file(path, cddf)
+
+    """Signal counting and mailing"""
 
     count_signals()
     send_buy_signals_email()
