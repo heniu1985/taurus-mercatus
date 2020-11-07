@@ -343,11 +343,11 @@ def main():
     except:
         emails.download_error()
 
-    # count_signals()
-    # send_buy_signals_email()
-    # send_sell_signals_email()
-    # send_close_long_signals_email()
-    # send_close_short_signals_email()
+    count_signals()
+    send_buy_signals_email()
+    send_sell_signals_email()
+    send_close_long_signals_email()
+    send_close_short_signals_email()
 
 if __name__ == "__main__":
     main()
