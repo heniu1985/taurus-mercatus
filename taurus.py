@@ -196,7 +196,7 @@ def buy_signal(df):
     tsi_ma = df["TSI_MA"]
     signal = ""
 
-    if (tsi[-2] < 0 and tsi_ma[-1] < 0) and (tsi[-1] > tsi_ma[-1] and tsi[-2] < tsi[-2]):
+    if (tsi[-2] < 0 and tsi_ma[-1] < 0) and ((tsi[-1] > tsi_ma[-1] and tsi[-2] < tsi_ma[-2]) or (tsi[-1] > 0 and tsi[-2] < 0)):
         signal = "Buy"
     else:
         signal = False
@@ -216,7 +216,7 @@ def sell_signal(df):
     tsi_ma = df["TSI_MA"]
     signal = ""
 
-    if (tsi[-1] > 0 and tsi_ma[-1] > 0) and (tsi[-1] < tsi_ma[-1] and tsi[-2] > tsi[-2]):
+    if (tsi[-1] > 0 and tsi_ma[-1] > 0) and (tsi[-1] < tsi_ma[-1] and tsi[-2] > tsi_ma[-2]):
         signal = "Sell"
     else:
         signal = False
