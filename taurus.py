@@ -321,7 +321,7 @@ def send_sell_signals_email():
     if len(sell_dict) == 0:
         emails.no_signals(signal)
     else:
-        emails.buy_signals(sell_dict)
+        emails.sell_signals(sell_dict)
 
 def send_close_long_signals_email():
     """Function send close long posiotion signals
@@ -332,7 +332,7 @@ def send_close_long_signals_email():
     if len(close_long_dict) == 0:
         emails.no_signals(signal)
     else:
-        emails.buy_signals(close_long_dict)
+        emails.close_long_signals(close_long_dict)
 
 def send_close_short_signals_email():
     """Function send close short position signals
@@ -343,7 +343,7 @@ def send_close_short_signals_email():
     if len(close_short_dict) == 0:
         emails.no_signals(signal)
     else:
-        emails.buy_signals(close_short_dict)
+        emails.close_short_signals(close_short_dict)
 
 def main():
 
