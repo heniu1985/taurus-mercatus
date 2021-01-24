@@ -300,6 +300,7 @@ def count_signals():
             close_long[filename[:3]] = cl
         else:
             pass
+        
         if cs == "Close short position":
             close_short[filename[:3]] = cs
         else:
