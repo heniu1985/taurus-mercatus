@@ -286,13 +286,24 @@ def count_signals():
         s = sell_signal(df)        
         cl = close_long_position(df)
         cs = close_short_position(df)
-        if s == False:
-            pass
-        else:
+        if b == "Buy":
             buy[filename[:3]] = b
+        else:
+            pass
+
+        if s == "Sell":
             sell[filename[:3]] = s
+        else:
+            pass
+
+        if cl == "Close long position":
             close_long[filename[:3]] = cl
+        else:
+            pass
+        if cs == "Close short position":
             close_short[filename[:3]] = cs
+        else:
+            pass
     
     signals.append(buy)
     signals.append(sell)
@@ -371,11 +382,12 @@ def main():
 
     """Signal counting and mailing"""
 
-    count_signals()
+    l = count_signals()
     send_buy_signals_email()
     send_sell_signals_email()
     send_close_long_signals_email()
     send_close_short_signals_email()
+    print(l)
 
 if __name__ == "__main__":
     main()
